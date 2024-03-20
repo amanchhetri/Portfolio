@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Portfolio Template
 
 https://github.com/shaqdeff/Portfolio-Template/assets/92020713/eed76a82-e59d-440b-a04c-a2dc00a508b7
@@ -98,3 +99,6 @@ Happy coding and showcasing!
 ## Show your support
 
 Give a ⭐️ if you like this project!
+=======
+# Portfolio
+>>>>>>> d0a805eb768ce16addc60ab6e87b96bc705c95c9
