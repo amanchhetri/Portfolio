@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { styles } from '../styles';
 import { navLinks } from '../constants';
-import { close, menu, logo, logotext, logo1 } from '../assets';
+import { close, menu, logo, logo1 } from '../assets';
 
 const Navbar = () => {
   const [active, setActive] = useState('');
@@ -31,7 +31,7 @@ const Navbar = () => {
           <img
             src={logo1}
             alt="logo"
-            className="sm:w-[120px] sm:h-[120px] w-[100px] h-[100px] -ml-[0.6rem] object-contain"
+            className="sm:w-[100px] sm:h-[100px] w-[80px] h-[80px] -ml-[0.6rem] object-contain"
           />
         </Link>
         <ul className="list-none hidden sm:flex flex-row gap-14 mt-2">

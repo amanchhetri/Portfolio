@@ -4,6 +4,9 @@ export default {
   mode: 'jit',
   theme: {
     extend: {
+      blur: {
+        xs: '1px'
+      },
       colors: {
         primary: '#050816',
         secondary: '#aaa6c3',
