@@ -13,21 +13,17 @@ import {
   nodejs,
   git,
   figma,
-  docker,
   postgresql,
-  rubyrails,
-  graphql,
   mongodb,
-  komikult,
-  leaderboard,
-  math,
-  movie,
-  nyeusi,
-  space,
   coverhunt,
-  dcc,
   kelhel,
   microverse,
+  soundboard,
+  todolist,
+  pictureyard,
+  leptonmaps,
+  cryptosky,
+  mentorstudents
 } from '../assets';
 
 export const navLinks = [
@@ -141,7 +137,52 @@ const experiences = [
 
 const projects = [
   {
-    id: 'project-1',
+    id: 'project-5',
+    name: 'Lepton Maps',
+    description:
+      'Our SaaS company specializes in providing a range of GeoIntelligence services',
+    tags: [
+      {
+        name: 'nextjs',
+        color: 'blue-text-gradient',
+      },
+      {
+        name: 'supabase',
+        color: 'green-text-gradient',
+      },
+      {
+        name: 'css',
+        color: 'pink-text-gradient',
+      },
+    ],
+    image: leptonmaps,
+    repo: 'https://github.com/amanchhetri/',
+    demo: 'https://leptonmaps.com/',
+  },
+  {
+    id: 'project-6',
+    name: 'MentorStudents',
+    description: 'We help you empower your students to speak with college mentors and get insiders view on college programs of interest',
+    tags: [
+      {
+        name: 'react',
+        color: 'blue-text-gradient',
+      },
+      {
+        name: 'mongodb',
+        color: 'green-text-gradient',
+      },
+      {
+        name: 'next',
+        color: 'pink-text-gradient',
+      },
+    ],
+    image: mentorstudents,
+    repo: 'https://github.com/amanchhetri/',
+    demo: 'https://mentorstudents.org/',
+  },
+  {
+    id: 'project-4',
     name: 'Crypto Sky',
     description: 'A website showcasing a comprehensive list of cryptocurrency coins along with their respective price graphs provides users with valuable insights and information about the cryptocurrency market.',
     tags: [
@@ -158,7 +199,7 @@ const projects = [
         color: 'pink-text-gradient',
       },
     ],
-    image: komikult,
+    image: cryptosky,
     repo: 'https://github.com/amanchhetri/crytpo-sky',
     demo: 'https://crytpo-sky.vercel.app/#/',
   },
@@ -181,7 +222,7 @@ const projects = [
         color: 'pink-text-gradient',
       },
     ],
-    image: leaderboard,
+    image: soundboard,
     repo: 'https://github.com/amanchhetri/SoundBoard',
     demo: 'https://sound-board-eight.vercel.app/',
   },
@@ -203,55 +244,32 @@ const projects = [
         color: 'pink-text-gradient',
       },
     ],
-    image: math,
+    image: pictureyard,
     repo: 'https://github.com/amanchhetri/PictureYard',
     demo: 'https://picture-yard.vercel.app/',
   },
-  {
-    id: 'project-4',
-    name: 'Todo List',
-    description: `A todo list application built with React.js provides a user-friendly interface for managing tasks and staying organized.`,
-    tags: [
-      {
-        name: 'nextjs',
-        color: 'blue-text-gradient',
-      },
-      {
-        name: 'supabase',
-        color: 'green-text-gradient',
-      },
-      {
-        name: 'css',
-        color: 'pink-text-gradient',
-      },
-    ],
-    image: movie,
-    repo: 'https://github.com/amanchhetri/todo-list',
-    demo: 'https://todo-app-iota-blond-86.vercel.app/',
-  },
-  {
-    id: 'project-5',
-    name: 'Lepton Maps',
-    description:
-      'Our SaaS company specializes in providing a range of GeoIntelligence services',
-    tags: [
-      {
-        name: 'nextjs',
-        color: 'blue-text-gradient',
-      },
-      {
-        name: 'supabase',
-        color: 'green-text-gradient',
-      },
-      {
-        name: 'css',
-        color: 'pink-text-gradient',
-      },
-    ],
-    image: nyeusi,
-    repo: 'https://github.com/amanchhetri/',
-    demo: 'https://leptonmaps.com/',
-  },
+  // {
+  //   id: 'project-4',
+  //   name: 'Todo List',
+  //   description: `A todo list application built with React.js provides a user-friendly interface for managing tasks and staying organized.`,
+  //   tags: [
+  //     {
+  //       name: 'nextjs',
+  //       color: 'blue-text-gradient',
+  //     },
+  //     {
+  //       name: 'supabase',
+  //       color: 'green-text-gradient',
+  //     },
+  //     {
+  //       name: 'css',
+  //       color: 'pink-text-gradient',
+  //     },
+  //   ],
+  //   image: todolist,
+  //   repo: 'https://github.com/amanchhetri/todo-list',
+  //   demo: 'https://todo-app-iota-blond-86.vercel.app/',
+  // },
 ];
 
 export { services, technologies, experiences, projects };

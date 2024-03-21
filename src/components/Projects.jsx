@@ -32,7 +32,7 @@ const ProjectCard = ({
       <img
         src={image}
         alt={name}
-        className="absolute w-full h-full object-cover rounded-[24px]"
+        className="absolute w-full h-full object-cover rounded-[24px] grayscale blur-xs"
       />
 
       {active !== id ? (
@@ -111,7 +111,7 @@ const ProjectCard = ({
 };
 
 const Projects = () => {
-  const [active, setActive] = useState('project-2');
+  const [active, setActive] = useState('project-5');
 
   return (
     <div className="-mt-[6rem]">
