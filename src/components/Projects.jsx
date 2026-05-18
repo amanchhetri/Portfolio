@@ -90,7 +90,7 @@ function ProjectsHorizontal() {
   const wrapperRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: wrapperRef,
-    offset: ['start start', 'end end'],
+    offset: ['start start', 'end start'],
   });
 
   const panelCount = projects.length;
@@ -101,21 +101,30 @@ function ProjectsHorizontal() {
     totalContentVW - 100 + RIGHT_PAD_VW,
   );
 
+  const wrapperHeightVh = Math.max(300, maxTranslateVW + 100);
+  const pinEndProgress = (wrapperHeightVh - 100) / wrapperHeightVh;
+
   const x = useTransform(
     scrollYProgress,
-    [0, 1],
+    [0, pinEndProgress],
     ['0vw', `-${maxTranslateVW}vw`],
   );
 
-  const wrapperHeight = `${Math.max(300, maxTranslateVW + 100)}vh`;
+  const opacity = useTransform(
+    scrollYProgress,
+    [pinEndProgress, Math.min(1, pinEndProgress + 0.08)],
+    [1, 0],
+  );
 
   return (
     <section
       ref={wrapperRef}
       id="projects"
       className="relative w-full"
-      style={{ height: wrapperHeight }}>
-      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
+      style={{ height: `${wrapperHeightVh}vh` }}>
+      <motion.div
+        style={{ opacity }}
+        className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
         <div className="mx-auto mb-10 w-full max-w-6xl px-6 sm:px-10 lg:px-12">
           <Reveal>
             <Kicker number="04">Projects</Kicker>
@@ -142,7 +151,7 @@ function ProjectsHorizontal() {
             />
           ))}
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
