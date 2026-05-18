@@ -12,8 +12,8 @@ export default function Hero() {
     <section
       id="top"
       className="relative flex min-h-[100svh] items-center overflow-hidden px-6 pt-24 sm:px-10 lg:px-12">
-      <BeamsBackground />
       <AnimatedGrid />
+      <BeamsBackground />
 
       <motion.div
         className="relative z-10 mx-auto w-full max-w-6xl"

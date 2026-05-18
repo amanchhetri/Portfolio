@@ -4,7 +4,7 @@ export default function AnimatedGrid({ className, fade = true }) {
   return (
     <div
       className={cn(
-        'absolute inset-0 -z-10 overflow-hidden',
+        'pointer-events-none absolute inset-0 z-0 overflow-hidden',
         className,
       )}
       aria-hidden>

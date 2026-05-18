@@ -130,7 +130,7 @@ export default function BeamsBackground({ className }) {
   return (
     <div
       className={cn(
-        'pointer-events-none absolute inset-0 -z-10 overflow-hidden',
+        'pointer-events-none absolute inset-0 z-0 overflow-hidden',
         className,
       )}
       aria-hidden>
@@ -139,7 +139,7 @@ export default function BeamsBackground({ className }) {
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse at center top, transparent 0%, rgba(5,6,10,0.7) 70%, #05060A 100%)',
+            'linear-gradient(to bottom, transparent 0%, transparent 75%, rgba(5,6,10,0.7) 100%)',
         }}
       />
     </div>
