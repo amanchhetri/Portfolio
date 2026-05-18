@@ -12,6 +12,7 @@ import {
 } from './components';
 import ScrollProgress from './components/ui/ScrollProgress';
 import GradientHairline from './components/ui/GradientHairline';
+import CustomCursor from './components/ui/CustomCursor';
 import MouseOrb from './components/fx/MouseOrb';
 import Noise from './components/fx/Noise';
 
@@ -41,6 +42,7 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-bg text-text">
+      <CustomCursor />
       <MouseOrb />
       <Noise />
       <Navbar />

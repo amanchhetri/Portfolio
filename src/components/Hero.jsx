@@ -6,6 +6,7 @@ import BeamsBackground from './fx/BeamsBackground';
 import Magnetic from './ui/Magnetic';
 import TextShimmer from './ui/TextShimmer';
 import Kicker from './ui/Kicker';
+import Typewriter from './ui/Typewriter';
 
 export default function Hero() {
   return (
@@ -34,7 +35,15 @@ export default function Hero() {
         <motion.p
           variants={fadeUp(0.25)}
           className={`${styles.heroSub} mt-6 max-w-xl`}>
-          Frontend Developer
+          <Typewriter
+            words={[
+              'Frontend Developer',
+              'UI Engineer',
+              'React Specialist',
+              'Creative Coder',
+            ]}
+            className="text-text"
+          />
           <br className="hidden sm:block" />
           I build meaningful experiences.
         </motion.p>
