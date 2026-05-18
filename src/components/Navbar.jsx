@@ -1,101 +1,103 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { styles } from '../styles';
+import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { navLinks } from '../constants';
-import { close, menu, logo, logo1 } from '../assets';
+import { cn } from '../lib/cn';
 
-const Navbar = () => {
-  const [active, setActive] = useState('');
-  const [toggle, setToggle] = useState(false);
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <nav
-      className={`${styles.paddingX} w-full flex items-center py-2 fixed 
-      top-0 z-20 bg-flashWhite sm:opacity-[0.97] xxs:h-[12vh]`}>
-      <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
-        <Link
-          to="/"
-          className="flex items-center gap-2"
-          onClick={() => {
-            setActive('');
-            window.scrollTo(0, 0);
-          }}>
-          {/* <img
-            src={logo1} // your logo comes here
-            alt="logo"
-            className="sm:w-[50px] sm:h-[50px] w-[45px] h-[45px] object-contain"
-          /> */}
+    <header
+      className={cn(
+        'fixed inset-x-0 top-0 z-40 transition-colors duration-500',
+        scrolled
+          ? 'border-b border-white/5 bg-bg/70 backdrop-blur-xl'
+          : 'border-b border-transparent bg-transparent',
+      )}>
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 sm:px-10 lg:px-12">
+        <a
+          href="#top"
+          className="font-mono text-sm tracking-[0.3em] text-text transition-colors hover:text-transparent hover:bg-clip-text hover:bg-accent-gradient">
+          AC
+        </a>
 
-          {/* if you have text you want besides your logo it comes here.
-          Otherwise delete this if you don't need it. */}
-          <img
-            src={logo1}
-            alt="logo"
-            className="sm:w-[100px] sm:h-[100px] w-[80px] h-[80px] -ml-[0.6rem] object-contain"
-          />
-        </Link>
-        <ul className="list-none hidden sm:flex flex-row gap-14 mt-2">
-          {navLinks.map((nav) => (
-            <li
-              key={nav.id}
-              className={`${
-                active === nav.title ? 'text-french' : 'text-eerieBlack'
-              } hover:text-taupe text-[21px] font-medium font-mova 
-                uppercase tracking-[3px] cursor-pointer nav-links`}
-              onClick={() => setActive(nav.title)}>
-              <a href={`#${nav.id}`}>{nav.title}</a>
+        <ul className="hidden items-center gap-10 sm:flex">
+          {navLinks.map((link) => (
+            <li key={link.id}>
+              <a
+                href={`#${link.id}`}
+                className="group relative font-mono text-xs uppercase tracking-[0.25em] text-muted transition-colors hover:text-text">
+                {link.title}
+                <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-accent-gradient transition-transform duration-500 ease-out group-hover:scale-x-100" />
+              </a>
             </li>
           ))}
         </ul>
 
-        {/* mobile */}
-        <div className="sm:hidden flex flex-1 w-screen justify-end items-center">
-          {toggle ? (
-            <div
-              className={`p-6 bg-flashWhite opacity-[0.98] absolute 
-                top-0 left-0 w-screen h-[100vh] z-10 menu ${
-                  toggle ? 'menu-open' : 'menu-close'
-                }`}>
-              <div className="flex justify-end">
-                <img
-                  src={close}
-                  alt="close"
-                  className="w-[22px] h-[22px] object-contain cursor-pointer"
-                  onClick={() => setToggle(!toggle)}
-                />
-              </div>
-              <ul
-                className="list-none flex flex-col -gap-[1rem] 
-                items-start justify-end mt-[10rem] -ml-[35px]">
-                {navLinks.map((nav) => (
-                  <li
-                    id={nav.id}
-                    key={nav.id}
-                    className={`${
-                      active === nav.title ? 'text-french' : 'text-eerieBlack'
-                    } text-[88px] font-bold font-arenq 
-                      uppercase tracking-[1px] cursor-pointer`}
-                    onClick={() => {
-                      setToggle(!toggle);
-                      setActive(nav.title);
-                    }}>
-                    <a href={`#${nav.id}`}>{nav.title}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : (
-            <img
-              src={menu}
-              alt="menu"
-              className="w-[34px] h-[34px] object-contain cursor-pointer"
-              onClick={() => setToggle(!toggle)}
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="Toggle menu"
+          aria-expanded={open}
+          className="sm:hidden">
+          <div className="flex flex-col gap-1.5">
+            <span
+              className={cn(
+                'block h-px w-6 bg-text transition-transform duration-300',
+                open && 'translate-y-[6px] rotate-45',
+              )}
             />
-          )}
-        </div>
-      </div>
-    </nav>
-  );
-};
+            <span
+              className={cn(
+                'block h-px w-6 bg-text transition-opacity duration-300',
+                open && 'opacity-0',
+              )}
+            />
+            <span
+              className={cn(
+                'block h-px w-6 bg-text transition-transform duration-300',
+                open && '-translate-y-[6px] -rotate-45',
+              )}
+            />
+          </div>
+        </button>
+      </nav>
 
-export default Navbar;
+      <AnimatePresence>
+        {open ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 top-16 z-30 bg-bg/95 backdrop-blur-xl sm:hidden">
+            <ul className="flex h-full flex-col items-start justify-center gap-8 px-10">
+              {navLinks.map((link, i) => (
+                <motion.li
+                  key={link.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.05 * i + 0.1, duration: 0.4 }}>
+                  <a
+                    href={`#${link.id}`}
+                    onClick={() => setOpen(false)}
+                    className="font-display text-5xl font-semibold tracking-tight text-text">
+                    {link.title}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </header>
+  );
+}
