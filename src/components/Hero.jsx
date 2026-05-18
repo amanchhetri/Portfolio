@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { styles } from '../styles';
 import { fadeUp, blurReveal, stagger, EASE } from '../utils/motion';
 import AnimatedGrid from './fx/AnimatedGrid';
-import AuroraBeams from './fx/AuroraBeams';
+import BeamsBackground from './fx/BeamsBackground';
 import Magnetic from './ui/Magnetic';
 import TextShimmer from './ui/TextShimmer';
 import Kicker from './ui/Kicker';
@@ -12,7 +12,7 @@ export default function Hero() {
     <section
       id="top"
       className="relative flex min-h-[100svh] items-center overflow-hidden px-6 pt-24 sm:px-10 lg:px-12">
-      <AuroraBeams />
+      <BeamsBackground />
       <AnimatedGrid />
 
       <motion.div
