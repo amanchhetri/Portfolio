@@ -7,7 +7,7 @@ import Reveal from './ui/Reveal';
 import GlowOnHover from './ui/GlowOnHover';
 import Kicker from './ui/Kicker';
 
-function ExperienceItem({ experience, index }) {
+function ExperienceItem({ experience }) {
   return (
     <motion.div
       variants={fadeUp(0)}
@@ -58,7 +58,7 @@ function Experience() {
         <h2 className={`${styles.heading} mt-4`}>Work Experience.</h2>
       </Reveal>
       <Reveal delay={0.1}>
-        <p className={`${styles.body} mt-4 max-w-2xl`}>What I've done so far.</p>
+        <p className={`${styles.body} mt-4 max-w-2xl`}>What I&apos;ve done so far.</p>
       </Reveal>
 
       <div className="relative mt-16">

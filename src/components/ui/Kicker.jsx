@@ -7,7 +7,7 @@ export default function Kicker({ number, children, className }) {
         'font-mono text-xs uppercase tracking-[0.25em] text-muted',
         className,
       )}>
-      <span className="text-accent-from">// </span>
+      <span className="text-accent-from">{'// '}</span>
       {number ? `${number} — ` : null}
       {children}
     </span>

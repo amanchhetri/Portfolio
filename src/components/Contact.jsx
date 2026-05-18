@@ -12,11 +12,11 @@ function Contact() {
         <Kicker number="06">Get in touch</Kicker>
       </Reveal>
       <Reveal delay={0.05}>
-        <h2 className={`${styles.heading} mt-4`}>Let's build something.</h2>
+        <h2 className={`${styles.heading} mt-4`}>Let&apos;s build something.</h2>
       </Reveal>
       <Reveal delay={0.1}>
         <p className={`${styles.body} mx-auto mt-6 max-w-lg`}>
-          Have an idea, role, or project in mind? Drop me a line — I'm usually quick to reply.
+          Have an idea, role, or project in mind? Drop me a line — I&apos;m usually quick to reply.
         </p>
       </Reveal>
 

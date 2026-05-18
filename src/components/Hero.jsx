@@ -27,7 +27,7 @@ export default function Hero() {
         <motion.h1
           variants={blurReveal(0.1)}
           className={`${styles.heroHeading} mt-6`}>
-          Hi, I'm{' '}
+          Hi, I&apos;m{' '}
           <TextShimmer className="font-display">AMAN</TextShimmer>
         </motion.h1>
 
