@@ -4,6 +4,7 @@ import {
   Hero,
   Navbar,
   About,
+  Stats,
   Skills,
   Experience,
   Projects,
@@ -52,6 +53,8 @@ export default function App() {
         <Hero />
         <GradientHairline />
         <About />
+        <GradientHairline />
+        <Stats />
         <GradientHairline />
         <Skills />
         <GradientHairline />
