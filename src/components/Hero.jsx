@@ -1,98 +1,83 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { styles } from '../styles';
-import { navLinks } from '../constants';
-import { shaq, bwmap, worldmap } from '../assets';
+import { fadeUp, blurReveal, stagger, EASE } from '../utils/motion';
+import AnimatedGrid from './fx/AnimatedGrid';
+import AuroraBeams from './fx/AuroraBeams';
+import Magnetic from './ui/Magnetic';
+import TextShimmer from './ui/TextShimmer';
+import Kicker from './ui/Kicker';
 
-const Hero = () => {
+export default function Hero() {
   return (
-    <>
-      <div className="absolute top-0 left-0 z-0 h-[100vh] w-[97vw]">
-        <img
-          src={bwmap}
-          alt="world map"
-          className="w-full h-full sm:block hidden object-cover"
-        />
-      </div>
-      <div className="absolute top-0 left-0 z-0 h-[100vh] w-[97vw]">
-        <img
-          src={worldmap}
-          alt="world map"
-          className="w-full h-full sm:hidden block object-cover"
-        />
-      </div>
-      <section
-        className="relative flex sm:flex-row flex-col w-full h-screen mx-auto 
-        sm:bg-hero bg-hero-mobile overflow-hidden">
-        <div
-          className={`absolute inset-0 sm:top-[250px] top-[150px] 
-          lg:top-[150px] xl:top-[250px] ${styles.paddingX} 
-          max-w-7xl mx-auto flex flex-row items-start
-          justify-between gap-3`}>
-          <div className="flex flex-col justify-center items-center mt-5 ml-3">
-            <div className="w-5 h-5 rounded-full bg-[#0a0a0a] sm:hidden" />
-            <div className="w-1 sm:h-80 h-40 bw-gradient sm:hidden" />
-          </div>
+    <section
+      id="top"
+      className="relative flex min-h-[100svh] items-center overflow-hidden px-6 pt-24 sm:px-10 lg:px-12">
+      <AuroraBeams />
+      <AnimatedGrid />
 
-          <div>
-            <h1
-              className={`${styles.heroHeadText} text-eerieBlack font-poppins uppercase`}>
-              Hi, I'm{' '}
-              <span
-                className="sm:text-battleGray sm:text-[90px] 
-                text-eerieBlack text-[50px] font-mova
-                font-extrabold uppercase">
-                Aman
+      <motion.div
+        className="relative z-10 mx-auto w-full max-w-6xl"
+        variants={stagger(0.08, 0.2)}
+        initial="hidden"
+        animate="show">
+        <motion.div variants={fadeUp(0)}>
+          <Kicker number="01">Introduction</Kicker>
+        </motion.div>
+
+        <motion.h1
+          variants={blurReveal(0.1)}
+          className={`${styles.heroHeading} mt-6`}>
+          Hi, I'm{' '}
+          <TextShimmer className="font-display">AMAN</TextShimmer>
+        </motion.h1>
+
+        <motion.p
+          variants={fadeUp(0.25)}
+          className={`${styles.heroSub} mt-6 max-w-xl`}>
+          Frontend Developer
+          <br className="hidden sm:block" />
+          I build meaningful experiences.
+        </motion.p>
+
+        <motion.div
+          variants={fadeUp(0.4)}
+          className="mt-10 flex flex-wrap items-center gap-4">
+          <Magnetic>
+            <a
+              href="#projects"
+              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-accent-gradient px-7 py-3 font-mono text-xs uppercase tracking-[0.25em] text-bg shadow-glow transition-shadow duration-500 hover:shadow-glow-cyan">
+              View Projects
+              <span className="transition-transform duration-300 group-hover:translate-x-1">
+                →
               </span>
-            </h1>
-            <p className={`${styles.heroSubText} mt-2 text-eerieBlack`}>
-              Frontend Developer <br className="sm:block hidden" />
-              I build meaningful experiences.
-            </p>
-          </div>
-          <div
-            className="w-screen flex flex-col items-start 
-            justify-center sm:-ml-[3rem] xxs:mt-4"></div>
+            </a>
+          </Magnetic>
 
-          <div></div>
-        </div>
+          <Magnetic>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.02] px-7 py-3 font-mono text-xs uppercase tracking-[0.25em] text-text backdrop-blur-md transition-colors duration-300 hover:bg-white/[0.06]">
+              Get in touch
+            </a>
+          </Magnetic>
+        </motion.div>
+      </motion.div>
 
-        <div
-          className="absolute xs:bottom-10 bottom-32 w-full 
-          flex justify-center items-center">
-          <a href="#about">
-            <div
-              className="w-[35px] h-[64px] rounded-3xl border-4 
-            border-french border-dim flex
-            justify-center items-start p-2">
-              <motion.div
-                animate={{
-                  y: [0, 24, 0],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  repeatType: 'loop',
-                }}
-                className="w-3 h-3 rounded-full bg-taupe mb-1"
-              />
-            </div>
-          </a>
-        </div>
-
-        {/* Your image comes here. Feel free to remove image if you don't plan to have one.*/}
-        <div>
-          <img
-            className="absolute bottom-0 ml-[50vw] 
-            lg:ml-[75vw] md:ml-[60vw] xmd:ml-[60vw] 2xl:ml-[83vw]
-            sm:h-[90vh] md:h-[70vh] xl:h-[80vh]"
-            src={shaq}
-            alt="shaquille"
+      <motion.a
+        href="#about"
+        aria-label="Scroll to about"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.1, duration: 0.6, ease: EASE }}>
+        <div className="flex h-12 w-7 items-start justify-center rounded-full border border-white/15 p-2">
+          <motion.span
+            className="block h-2 w-2 rounded-full bg-text"
+            animate={{ y: [0, 14, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
           />
         </div>
-      </section>
-    </>
+      </motion.a>
+    </section>
   );
-};
-
-export default Hero;
+}
