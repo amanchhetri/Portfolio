@@ -130,7 +130,14 @@ const experiences = [
     company_name: 'Lepton Software',
     icon: kelhel,
     iconBg: '#333333',
-    date: 'Feb 2023 - Present',
+    date: 'Feb 2023 - Oct 2025',
+  },
+  {
+    title: 'Frontend Developer',
+    company_name: 'Zee Entertainment Enterprises Limited',
+    icon: kelhel,
+    iconBg: '#333333',
+    date: 'Dec 2025 - Present',
   },
 ];
 
