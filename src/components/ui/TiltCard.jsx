@@ -30,15 +30,17 @@ export default function TiltCard({
   };
 
   return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
-      style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-      whileHover={{ scale }}
-      transition={{ scale: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
-      className={className}>
-      {children}
-    </motion.div>
+    <div style={{ perspective: 1000 }} className={className}>
+      <motion.div
+        ref={ref}
+        onMouseMove={handleMove}
+        onMouseLeave={handleLeave}
+        style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+        whileHover={{ scale }}
+        transition={{ scale: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
+        className="h-full w-full">
+        {children}
+      </motion.div>
+    </div>
   );
 }
