@@ -1,157 +1,132 @@
-import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { SectionWrapper } from '../hoc';
-import { styles } from '../styles';
-import { github, pineapple, pineappleHover } from '../assets';
 import { projects } from '../constants';
-import { fadeIn, textVariant, staggerContainer } from '../utils/motion';
+import { github as githubIcon } from '../assets';
+import { styles } from '../styles';
+import { fadeUp, stagger } from '../utils/motion';
+import SectionWrapper from '../hoc/SectionWrapper';
+import Reveal from './ui/Reveal';
+import TiltCard from './ui/TiltCard';
+import GlowOnHover from './ui/GlowOnHover';
+import Kicker from './ui/Kicker';
+import { cn } from '../lib/cn';
 
-const ProjectCard = ({
-  id,
-  name,
-  description,
-  image,
-  repo,
-  demo,
-  index,
-  active,
-  handleClick,
-}) => {
-  return (
-    <motion.div
-      variants={fadeIn('right', 'spring', index * 0.5, 0.75)}
-      className={`relative ${
-        active === id ? 'lg:flex-[3.5] flex-[10]' : 'lg:flex-[0.5] flex-[2]'
-      } flex items-center justify-center min-w-[170px] 
-      h-[420px] cursor-pointer card-shadow`}
-      onClick={() => handleClick(id)}>
-      <div
-        className="absolute top-0 left-0 z-10 bg-jetLight 
-      h-full w-full opacity-[0.5] rounded-[24px]"></div>
-
-      <img
-        src={image}
-        alt={name}
-        className="absolute w-full h-full object-cover rounded-[24px] grayscale blur-xs"
-      />
-
-      {active !== id ? (
-        <div className="flex items-center justify-start pr-[4.5rem]">
-          <h3
-            className="font-extrabold font-beckman uppercase w-[200px] h-[30px] 
-        whitespace-nowrap sm:text-[27px] text-[18px] text-timberWolf tracking-[1px]
-        absolute z-0 lg:bottom-[7rem] lg:rotate-[-90deg] lg:origin-[0,0]
-        leading-none z-20">
-            {name}
-          </h3>
-        </div>
-      ) : (
-        <>
-          <div
-            className="absolute bottom-0 p-8 justify-start w-full 
-            flex-col bg-[rgba(122,122,122,0.5)] rounded-b-[24px] z-20">
-            <div className="absolute inset-0 flex justify-end m-3">
-              <div
-                onClick={() => window.open(repo, '_blank')}
-                className="bg-night sm:w-11 sm:h-11 w-10 h-10 rounded-full 
-                  flex justify-center items-center cursor-pointer
-                  sm:opacity-[0.9] opacity-[0.8]">
-                <img
-                  src={github}
-                  alt="source code"
-                  className="w-4/5 h-4/5 object-contain"
-                />
-              </div>
-            </div>
-
-            <h2
-              className="font-bold sm:text-[32px] text-[24px] 
-              text-timberWolf uppercase font-beckman sm:mt-0 -mt-[1rem]">
-              {name}
-            </h2>
-            <p
-              className="text-silver sm:text-[14px] text-[12px] 
-              max-w-3xl sm:leading-[24px] leading-[18px]
-              font-poppins tracking-[1px]">
-              {description}
-            </p>
-            <button
-              className="live-demo flex justify-between 
-              sm:text-[16px] text-[14px] text-timberWolf 
-              font-bold font-beckman items-center py-5 pl-2 pr-3 
-              whitespace-nowrap gap-1 sm:w-[138px] sm:h-[50px] 
-              w-[125px] h-[46px] rounded-[10px] glassmorphism 
-              sm:mt-[22px] mt-[16px] hover:bg-battleGray 
-              hover:text-eerieBlack transition duration-[0.2s] 
-              ease-in-out"
-              onClick={() => window.open(demo, '_blank')}
-              onMouseOver={() => {
-                document
-                  .querySelector('.btn-icon')
-                  .setAttribute('src', pineappleHover);
-              }}
-              onMouseOut={() => {
-                document
-                  .querySelector('.btn-icon')
-                  .setAttribute('src', pineapple);
-              }}>
-              <img
-                src={pineapple}
-                alt="pineapple"
-                className="btn-icon sm:w-[34px] sm:h-[34px] 
-                  w-[30px] h-[30px] object-contain"
-              />
-              LIVE DEMO
-            </button>
-          </div>
-        </>
-      )}
-    </motion.div>
-  );
+const TAG_COLORS = {
+  'blue-text-gradient': 'text-sky-300 border-sky-300/30',
+  'green-text-gradient': 'text-emerald-300 border-emerald-300/30',
+  'pink-text-gradient': 'text-fuchsia-300 border-fuchsia-300/30',
 };
 
-const Projects = () => {
-  const [active, setActive] = useState('project-5');
+const BENTO_LAYOUT = [
+  'sm:col-span-2 sm:row-span-2',
+  'sm:col-span-1 sm:row-span-1',
+  'sm:col-span-1 sm:row-span-1',
+  'sm:col-span-1 sm:row-span-1',
+  'sm:col-span-1 sm:row-span-1',
+];
 
+function ProjectCard({ project, layoutClass, index }) {
   return (
-    <div className="-mt-[6rem]">
-      <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} `}>Case Studies</p>
-        <h2 className={`${styles.sectionHeadTextLight}`}>Projects.</h2>
-      </motion.div>
+    <motion.article
+      variants={fadeUp(index * 0.06)}
+      className={cn('h-[260px] sm:h-full sm:min-h-[260px]', layoutClass)}>
+      <GlowOnHover className="h-full rounded-2xl">
+        <TiltCard
+          max={6}
+          className="group relative h-full overflow-hidden rounded-2xl border border-white/5">
+          <img
+            src={project.image}
+            alt={project.name}
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.04]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/40 to-transparent" />
 
-      <div className="w-full flex">
-        <motion.p
-          variants={fadeIn('', '', 0.1, 1)}
-          className="mt-4 text-taupe text-[18px] max-w-3xl leading-[30px]">
+          <div className="relative z-10 flex h-full flex-col justify-between p-6">
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag.name}
+                    className={cn(
+                      'rounded-full border bg-white/[0.04] px-3 py-1 font-mono text-[10px] uppercase tracking-widest backdrop-blur',
+                      TAG_COLORS[tag.color] || 'text-muted border-white/15',
+                    )}>
+                    {tag.name}
+                  </span>
+                ))}
+              </div>
+              <a
+                href={project.repo}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                aria-label={`${project.name} source code`}
+                className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-bg/60 backdrop-blur transition-colors hover:bg-white/10">
+                <img src={githubIcon} alt="" className="h-4 w-4" />
+              </a>
+            </div>
+
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noreferrer"
+              className="block">
+              <h3 className="font-display text-2xl font-semibold text-text">
+                {project.name}
+              </h3>
+              <p className="mt-2 max-w-prose font-sans text-sm leading-relaxed text-muted line-clamp-3">
+                {project.description}
+              </p>
+              <span className="mt-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.25em] text-text">
+                Live Demo
+                <span className="transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
+              </span>
+            </a>
+          </div>
+        </TiltCard>
+      </GlowOnHover>
+    </motion.article>
+  );
+}
+
+function Projects() {
+  return (
+    <div>
+      <Reveal>
+        <Kicker number="04">Projects</Kicker>
+      </Reveal>
+      <Reveal delay={0.05}>
+        <h2 className={`${styles.heading} mt-4`}>Projects.</h2>
+      </Reveal>
+      <Reveal delay={0.1}>
+        <p className={`${styles.body} mt-6 max-w-2xl`}>
           These projects demonstrate my expertise with practical examples of
           some of my work, including brief descriptions and links to code
           repositories and live demos. They showcase my ability to tackle
           intricate challenges, adapt to various technologies, and efficiently
           oversee projects.
-        </motion.p>
-      </div>
+        </p>
+      </Reveal>
 
       <motion.div
-        variants={staggerContainer}
+        variants={stagger(0.06)}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: false, amount: 0.25 }}
-        className={`${styles.innerWidth} mx-auto flex flex-col`}>
-        <div className="mt-[50px] flex lg:flex-row flex-col min-h-[70vh] gap-5">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              index={index}
-              {...project}
-              active={active}
-              handleClick={setActive}
-            />
-          ))}
-        </div>
+        viewport={{ once: true, amount: 0.15 }}
+        className="mt-14 grid auto-rows-[260px] grid-cols-1 gap-5 sm:grid-cols-3 lg:auto-rows-[280px]">
+        {projects.map((project, i) => (
+          <ProjectCard
+            key={project.id}
+            project={project}
+            layoutClass={BENTO_LAYOUT[i] || ''}
+            index={i}
+          />
+        ))}
       </motion.div>
     </div>
   );
-};
+}
 
 export default SectionWrapper(Projects, 'projects');
