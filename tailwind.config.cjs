@@ -1,69 +1,63 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
-  mode: 'jit',
   theme: {
     extend: {
-      blur: {
-        xs: '1px'
-      },
       colors: {
-        primary: '#050816',
-        secondary: '#aaa6c3',
-        tertiary: '#151030',
-        'black-100': '#100d25',
-        'black-200': '#090325',
-        'white-100': '#f3f3f3',
-        flashWhite: '#f4f4f6',
-        platinum: '#e6e6e9',
-        platinumLight: '#f4f4f5',
-        timberWolf: '#d4d4d8',
-        taupe: '#9999a1',
-        silver: '#d6d6d6',
-        dim: '#66666e',
-        battleGray: '#858585',
-        french: '#b5b5ba',
-        night: '#141414',
-        jet: '#292929',
-        jetLight: '#333333',
-        jetGray: '#6d6d74',
-        richBlack: '#2e2e2e',
-        eerieBlack: '#1f1f1f',
-        onyx: '#5b5b5b',
+        bg: '#05060A',
+        surface: '#0B0D14',
+        text: '#F5F5F7',
+        muted: '#A1A1AA',
+        accent: {
+          from: '#7C5CFF',
+          to: '#22D3EE',
+        },
+      },
+      fontFamily: {
+        display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+      },
+      backgroundImage: {
+        'accent-gradient': 'linear-gradient(135deg, #7C5CFF 0%, #22D3EE 100%)',
+        'radial-fade':
+          'radial-gradient(ellipse at top, rgba(124,92,255,0.18), transparent 60%)',
       },
       boxShadow: {
-        card: '0px 35px 120px -15px #1f1f1f',
-        cardLight: '0px 19px 38px #eaeaec, 0px 15px 12px #eaeaec',
+        glow: '0 0 60px -10px rgba(124, 92, 255, 0.45)',
+        'glow-cyan': '0 0 60px -10px rgba(34, 211, 238, 0.4)',
       },
       screens: {
         xs: '450px',
         sm: '640px',
         md: '768px',
-        xmd: '900px',
-        lg: '1025px',
+        lg: '1024px',
         xl: '1280px',
         '2xl': '1536px',
-        '3xl': '1800px',
       },
-      backgroundImage: {
-        about:
-          'linear-gradient(165deg, rgba(244,244,246,1) 100%, rgba(122,122,122,1) 100%)',
-        experience:
-          "linear-gradient(135deg, rgba(244,244,246,0.5) 60%, rgba(10,10,10,0.2) 100%),url('/src/assets/backgrounds/white-abstract.png')",
-        experienceLight:
-          'linear-gradient(137deg, rgba(244,244,246,0.5) 60%, rgba(10,10,10,0.9) 60%)',
-        hero: 'linear-gradient(135deg, rgba(244,244,246,0.8) 60%, rgba(10,10,10,0.95) 60%)',
-        'hero-mobile':
-          'linear-gradient(137deg, rgba(244,244,246,0.8) 60%, rgba(10,10,10,1) 60%)',
-        tech: "linear-gradient(165deg, rgba(20,20,20,0.8) 100%, rgba(109,109,116,0.8) 100%), url('/src/assets/backgrounds/nairobi.png')",
+      animation: {
+        marquee: 'marquee 40s linear infinite',
+        'marquee-reverse': 'marquee-reverse 40s linear infinite',
+        'pulse-glow': 'pulse-glow 2.4s ease-in-out infinite',
+        'grid-drift': 'grid-drift 30s linear infinite',
       },
-      fontFamily: {
-        arenq: ['Arenq'],
-        beckman: ['Beckman'],
-        mova: ['Mova'],
-        overcameBold: ['Overcame Bold'],
-        overcameOutline: ['Overcame Outline'],
-        poppins: ['Poppins', 'sans-serif'],
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        'marquee-reverse': {
+          '0%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        'pulse-glow': {
+          '0%, 100%': { opacity: '0.6', transform: 'scale(1)' },
+          '50%': { opacity: '1', transform: 'scale(1.15)' },
+        },
+        'grid-drift': {
+          '0%': { backgroundPosition: '0 0' },
+          '100%': { backgroundPosition: '40px 40px' },
+        },
       },
     },
   },
