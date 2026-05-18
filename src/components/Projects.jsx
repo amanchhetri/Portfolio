@@ -81,6 +81,11 @@ function ProjectPanel({ project, index, total }) {
   );
 }
 
+const PANEL_VW = 80;
+const GAP_VW = 4;
+const LEFT_PAD_VW = 10;
+const RIGHT_PAD_VW = 10;
+
 function ProjectsHorizontal() {
   const wrapperRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -89,14 +94,20 @@ function ProjectsHorizontal() {
   });
 
   const panelCount = projects.length;
-  const trackPercent = ((panelCount - 1) / panelCount) * 100;
-  const x = useTransform(
-    scrollYProgress,
-    [0.05, 0.95],
-    ['0%', `-${trackPercent}%`],
+  const totalContentVW =
+    LEFT_PAD_VW + panelCount * PANEL_VW + (panelCount - 1) * GAP_VW;
+  const maxTranslateVW = Math.max(
+    0,
+    totalContentVW - 100 + RIGHT_PAD_VW,
   );
 
-  const wrapperHeight = `${Math.max(300, panelCount * 80)}vh`;
+  const x = useTransform(
+    scrollYProgress,
+    [0.04, 0.96],
+    ['0vw', `-${maxTranslateVW}vw`],
+  );
+
+  const wrapperHeight = `${Math.max(300, maxTranslateVW + 100)}vh`;
 
   return (
     <section
@@ -121,7 +132,7 @@ function ProjectsHorizontal() {
 
         <motion.div
           style={{ x }}
-          className="flex w-max gap-[4vw] pl-[10vw] pr-[10vw] will-change-transform">
+          className="flex w-max gap-[4vw] pl-[10vw] will-change-transform">
           {projects.map((project, i) => (
             <ProjectPanel
               key={project.id}
