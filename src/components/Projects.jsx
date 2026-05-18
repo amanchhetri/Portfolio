@@ -103,7 +103,7 @@ function ProjectsHorizontal() {
 
   const x = useTransform(
     scrollYProgress,
-    [0.04, 0.96],
+    [0, 1],
     ['0vw', `-${maxTranslateVW}vw`],
   );
 
