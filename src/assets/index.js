@@ -1,37 +1,37 @@
-import logo from './logo/logo-black.png';
-import logo1 from './logo/aman.png';
+import logo from './logo/logo-black.webp';
+import logo1 from './logo/aman.webp';
 
-import backend from './icons/backend.png';
-import ux from './icons/ux.png';
-import frontend from './icons/frontend.png';
-import prototyping from './icons/prototyping.png';
-import github from './icons/github.png';
-import close from './icons/close.png';
-import menu from './icons/menu.png';
+import backend from './icons/backend.webp';
+import ux from './icons/ux.webp';
+import frontend from './icons/frontend.webp';
+import prototyping from './icons/prototyping.webp';
+import github from './icons/github.webp';
+import close from './icons/close.webp';
+import menu from './icons/menu.webp';
 
-import css from './tech/css.png';
-import figma from './tech/figma.png';
-import git from './tech/git.png';
-import html from './tech/html.png';
-import javascript from './tech/javascript.png';
-import nodejs from './tech/nodejs.png';
-import reactjs from './tech/reactjs.png';
-import redux from './tech/redux.png';
-import tailwind from './tech/tailwind.png';
-import typescript from './tech/typescript.png';
-import postgresql from './tech/postgresql.png';
-import mongodb from './tech/mongodb.png';
+import css from './tech/css.webp';
+import figma from './tech/figma.webp';
+import git from './tech/git.webp';
+import html from './tech/html.webp';
+import javascript from './tech/javascript.webp';
+import nodejs from './tech/nodejs.webp';
+import reactjs from './tech/reactjs.webp';
+import redux from './tech/redux.webp';
+import tailwind from './tech/tailwind.webp';
+import typescript from './tech/typescript.webp';
+import postgresql from './tech/postgresql.webp';
+import mongodb from './tech/mongodb.webp';
 
-import coverhunt from './company/coverhunt.png';
-import kelhel from './company/kelhel.png';
-import microverse from './company/microverse.png';
+import coverhunt from './company/coverhunt.webp';
+import kelhel from './company/kelhel.webp';
+import microverse from './company/microverse.webp';
 
-import cryptosky from './projects/cryptosky.png';
-import leptonmaps from './projects/leptonmaps.png';
-import pictureyard from './projects/pictureyard.png';
-import soundboard from './projects/soundboard.png';
-import todolist from './projects/todolist.png';
-import mentorstudents from './projects/mentorstudents.png';
+import cryptosky from './projects/cryptosky.webp';
+import leptonmaps from './projects/leptonmaps.webp';
+import pictureyard from './projects/pictureyard.webp';
+import soundboard from './projects/soundboard.webp';
+import todolist from './projects/todolist.webp';
+import mentorstudents from './projects/mentorstudents.webp';
 
 export {
   logo,

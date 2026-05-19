@@ -28,6 +28,7 @@ function ProjectPanel({ project, index, total }) {
         src={project.image}
         alt={project.name}
         loading="lazy"
+        decoding="async"
         className="absolute inset-0 h-full w-full object-cover grayscale transition-all duration-700 hover:grayscale-0 hover:scale-[1.02]"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/40 to-transparent" />
@@ -43,7 +44,7 @@ function ProjectPanel({ project, index, total }) {
               <span
                 key={tag.name}
                 className={cn(
-                  'rounded-full border bg-white/[0.04] px-3 py-1 font-mono text-[10px] uppercase tracking-widest backdrop-blur',
+                  'rounded-full border bg-white/[0.04] px-3 py-1 font-mono text-[10px] uppercase tracking-widest',
                   TAG_COLORS[tag.color] || 'text-muted border-white/15',
                 )}>
                 {tag.name}
@@ -55,8 +56,16 @@ function ProjectPanel({ project, index, total }) {
             target="_blank"
             rel="noreferrer"
             aria-label={`${project.name} source code`}
-            className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/10 bg-bg/60 backdrop-blur transition-colors hover:bg-white/10">
-            <img src={githubIcon} alt="" className="h-4 w-4" />
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/10 bg-bg/80 transition-colors hover:bg-white/10">
+            <img
+              src={githubIcon}
+              alt=""
+              width="16"
+              height="16"
+              loading="lazy"
+              decoding="async"
+              className="h-4 w-4"
+            />
           </a>
         </div>
 
@@ -70,7 +79,7 @@ function ProjectPanel({ project, index, total }) {
           href={project.demo}
           target="_blank"
           rel="noreferrer"
-          className="group mt-6 inline-flex items-center gap-3 self-start rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 font-mono text-xs uppercase tracking-[0.25em] text-text backdrop-blur transition-all hover:border-accent-from/60 hover:bg-white/[0.06]">
+          className="group mt-6 inline-flex items-center gap-3 self-start rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 font-mono text-xs uppercase tracking-[0.25em] text-text transition-all hover:border-accent-from/60 hover:bg-white/[0.06]">
           Live Demo
           <span className="transition-transform duration-300 group-hover:translate-x-1">
             →
@@ -195,6 +204,7 @@ function ProjectsClassic() {
                     src={project.image}
                     alt={project.name}
                     loading="lazy"
+                    decoding="async"
                     className="absolute inset-0 h-full w-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.04]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/40 to-transparent" />
@@ -218,8 +228,16 @@ function ProjectsClassic() {
                         target="_blank"
                         rel="noreferrer"
                         aria-label={`${project.name} source code`}
-                        className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-bg/60 backdrop-blur transition-colors hover:bg-white/10">
-                        <img src={githubIcon} alt="" className="h-4 w-4" />
+                        className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-bg/80 transition-colors hover:bg-white/10">
+                        <img
+                          src={githubIcon}
+                          alt=""
+                          width="16"
+                          height="16"
+                          loading="lazy"
+                          decoding="async"
+                          className="h-4 w-4"
+                        />
                       </a>
                     </div>
                   </div>

@@ -67,8 +67,14 @@ export default function CustomCursor() {
     <>
       <motion.div
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[100] rounded-full bg-white mix-blend-difference"
-        style={{ x, y, translateX: '-50%', translateY: '-50%' }}
+        className="pointer-events-none fixed left-0 top-0 z-[100] rounded-full bg-white"
+        style={{
+          x,
+          y,
+          translateX: '-50%',
+          translateY: '-50%',
+          boxShadow: '0 0 6px rgba(0,0,0,0.4)',
+        }}
         animate={{ width: dotSize, height: dotSize, scale }}
         transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
       />

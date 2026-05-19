@@ -2,13 +2,14 @@ import { useEffect, useRef } from 'react';
 import { cn } from '../../lib/cn';
 
 const LAYERS = 3;
-const BEAMS_PER_LAYER = 8;
+const BEAMS_PER_LAYER_DESKTOP = 5;
+const BEAMS_PER_LAYER_MOBILE = 2;
 
 function createBeam(width, height, layer) {
   const angle = -35 + Math.random() * 10;
   const baseSpeed = 0.2 + layer * 0.2;
-  const baseOpacity = 0.05 + layer * 0.04;
-  const baseWidth = 10 + layer * 5;
+  const baseOpacity = 0.08 + layer * 0.05;
+  const baseWidth = 28 + layer * 14;
   return {
     x: Math.random() * width,
     y: Math.random() * height,
@@ -47,7 +48,11 @@ export default function BeamsBackground({ className }) {
     const parent = canvas.parentElement;
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const isMobile = window.matchMedia('(max-width: 767px)').matches;
+      const beamsPerLayer = isMobile
+        ? BEAMS_PER_LAYER_MOBILE
+        : BEAMS_PER_LAYER_DESKTOP;
+      const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.5);
       const w = parent ? parent.clientWidth : window.innerWidth;
       const h = parent ? parent.clientHeight : window.innerHeight;
       canvas.width = w * dpr;
@@ -59,7 +64,7 @@ export default function BeamsBackground({ className }) {
 
       beamsRef.current = [];
       for (let layer = 1; layer <= LAYERS; layer++) {
-        for (let i = 0; i < BEAMS_PER_LAYER; i++) {
+        for (let i = 0; i < beamsPerLayer; i++) {
           beamsRef.current.push(createBeam(w, h, layer));
         }
       }
@@ -68,7 +73,7 @@ export default function BeamsBackground({ className }) {
     resize();
     window.addEventListener('resize', resize);
 
-    const drawBeam = (beam, w) => {
+    const drawBeam = (beam) => {
       ctx.save();
       ctx.translate(beam.x, beam.y);
       ctx.rotate((beam.angle * Math.PI) / 180);
@@ -80,13 +85,12 @@ export default function BeamsBackground({ className }) {
       const rgb = HUES[beam.hue];
       const grad = ctx.createLinearGradient(0, 0, 0, beam.length);
       grad.addColorStop(0, `rgba(${rgb},0)`);
-      grad.addColorStop(0.2, `rgba(${rgb},${pulsing * 0.55})`);
-      grad.addColorStop(0.5, `rgba(${rgb},${pulsing})`);
-      grad.addColorStop(0.8, `rgba(${rgb},${pulsing * 0.55})`);
+      grad.addColorStop(0.25, `rgba(${rgb},${pulsing * 0.35})`);
+      grad.addColorStop(0.5, `rgba(${rgb},${pulsing * 0.6})`);
+      grad.addColorStop(0.75, `rgba(${rgb},${pulsing * 0.35})`);
       grad.addColorStop(1, `rgba(${rgb},0)`);
 
       ctx.fillStyle = grad;
-      ctx.filter = `blur(${2 + beam.layer * 2}px)`;
       ctx.fillRect(-beam.width / 2, 0, beam.width, beam.length);
       ctx.restore();
     };
@@ -96,6 +100,7 @@ export default function BeamsBackground({ className }) {
       const h = parent ? parent.clientHeight : window.innerHeight;
 
       ctx.clearRect(0, 0, w, h);
+      ctx.globalCompositeOperation = 'lighter';
 
       const beams = beamsRef.current;
       for (let i = 0; i < beams.length; i++) {
@@ -106,9 +111,10 @@ export default function BeamsBackground({ className }) {
           b.y = h + 50;
           b.x = Math.random() * w;
         }
-        drawBeam(b, w);
+        drawBeam(b);
       }
 
+      ctx.globalCompositeOperation = 'source-over';
       rafRef.current = requestAnimationFrame(tick);
     };
 
@@ -116,14 +122,29 @@ export default function BeamsBackground({ className }) {
       const w = parent ? parent.clientWidth : window.innerWidth;
       const h = parent ? parent.clientHeight : window.innerHeight;
       ctx.clearRect(0, 0, w, h);
-      beamsRef.current.forEach((b) => drawBeam(b, w));
-    } else {
-      rafRef.current = requestAnimationFrame(tick);
+      ctx.globalCompositeOperation = 'lighter';
+      beamsRef.current.forEach((b) => drawBeam(b));
+      ctx.globalCompositeOperation = 'source-over';
+      return () => window.removeEventListener('resize', resize);
     }
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!rafRef.current) rafRef.current = requestAnimationFrame(tick);
+        } else if (rafRef.current) {
+          cancelAnimationFrame(rafRef.current);
+          rafRef.current = 0;
+        }
+      },
+      { rootMargin: '200px' },
+    );
+    io.observe(canvas);
 
     return () => {
       window.removeEventListener('resize', resize);
-      cancelAnimationFrame(rafRef.current);
+      io.disconnect();
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
 

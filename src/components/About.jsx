@@ -15,7 +15,15 @@ function ServiceCard({ title, icon, index }) {
         <TiltCard className="glass relative h-full rounded-2xl p-6">
           <div className="relative z-10 flex h-full flex-col items-start gap-5">
             <div className="grid h-14 w-14 place-items-center rounded-xl bg-white/[0.03] ring-1 ring-white/10 shadow-glow">
-              <img src={icon} alt="" className="h-7 w-7 object-contain" />
+              <img
+                src={icon}
+                alt=""
+                width="28"
+                height="28"
+                loading="lazy"
+                decoding="async"
+                className="h-7 w-7 object-contain"
+              />
             </div>
             <h3 className="font-display text-lg font-semibold text-text">
               {title}

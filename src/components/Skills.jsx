@@ -23,7 +23,15 @@ function Marquee({ items }) {
           <div
             key={`${tech.name}-${i}`}
             className="flex shrink-0 items-center gap-4">
-            <img src={tech.icon} alt="" className="h-9 w-9 object-contain opacity-80" />
+            <img
+              src={tech.icon}
+              alt=""
+              width="36"
+              height="36"
+              loading="lazy"
+              decoding="async"
+              className="h-9 w-9 object-contain opacity-80"
+            />
             <span className="font-mono text-sm uppercase tracking-widest text-muted">
               {tech.name}
             </span>
@@ -40,7 +48,15 @@ function TechCard({ tech, index }) {
       <GlowOnHover className="rounded-xl">
         <div className="glass flex items-center gap-4 rounded-xl p-4 transition-transform duration-300 hover:-translate-y-1">
           <div className="grid h-10 w-10 place-items-center rounded-lg bg-white/[0.03] ring-1 ring-white/10">
-            <img src={tech.icon} alt="" className="h-6 w-6 object-contain" />
+            <img
+              src={tech.icon}
+              alt=""
+              width="24"
+              height="24"
+              loading="lazy"
+              decoding="async"
+              className="h-6 w-6 object-contain"
+            />
           </div>
           <span className="font-sans text-sm text-text">{tech.name}</span>
         </div>

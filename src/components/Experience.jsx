@@ -24,6 +24,10 @@ function ExperienceItem({ experience }) {
               <img
                 src={experience.icon}
                 alt={experience.company_name}
+                width="28"
+                height="28"
+                loading="lazy"
+                decoding="async"
                 className="h-7 w-7 object-contain"
               />
             </div>

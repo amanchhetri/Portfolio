@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Lenis from 'lenis';
 import {
   Hero,
@@ -18,9 +18,21 @@ import MouseOrb from './components/fx/MouseOrb';
 import Noise from './components/fx/Noise';
 
 export default function App() {
+  const [enhanced, setEnhanced] = useState(false);
+
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return;
+    const reduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+    const mq = window.matchMedia('(min-width: 1024px) and (hover: hover)');
+    const cores = navigator.hardwareConcurrency || 8;
+    const setFromMq = (matches) => setEnhanced(!reduced && matches && cores >= 4);
+    setFromMq(mq.matches);
+    const handler = (e) => setFromMq(e.matches);
+    mq.addEventListener('change', handler);
+
+    if (reduced) {
+      return () => mq.removeEventListener('change', handler);
     }
     const lenis = new Lenis({
       duration: 1.6,
@@ -36,6 +48,7 @@ export default function App() {
     };
     rafId = requestAnimationFrame(raf);
     return () => {
+      mq.removeEventListener('change', handler);
       cancelAnimationFrame(rafId);
       lenis.destroy();
     };
@@ -44,8 +57,8 @@ export default function App() {
   return (
     <div className="relative min-h-screen bg-bg text-text">
       <CustomCursor />
-      <MouseOrb />
-      <Noise />
+      {enhanced && <MouseOrb />}
+      {enhanced && <Noise />}
       <Navbar />
       <ScrollProgress />
 

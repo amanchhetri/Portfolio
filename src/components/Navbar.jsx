@@ -19,7 +19,7 @@ export default function Navbar() {
       className={cn(
         'fixed inset-x-0 top-0 z-40 transition-colors duration-500',
         scrolled
-          ? 'border-b border-white/5 bg-bg/70 backdrop-blur-xl'
+          ? 'border-b border-white/5 bg-bg/90 backdrop-blur-md'
           : 'border-b border-transparent bg-transparent',
       )}>
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 sm:px-10 lg:px-12">

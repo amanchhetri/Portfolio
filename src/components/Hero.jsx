@@ -117,7 +117,7 @@ export default function Hero() {
             <Magnetic>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.02] px-7 py-3 font-mono text-xs uppercase tracking-[0.25em] text-text backdrop-blur-md transition-colors duration-300 hover:bg-white/[0.06]">
+                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.02] px-7 py-3 font-mono text-xs uppercase tracking-[0.25em] text-text transition-colors duration-300 hover:bg-white/[0.06]">
                 Get in touch
               </a>
             </Magnetic>
