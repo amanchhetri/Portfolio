@@ -13,6 +13,7 @@ import Magnetic from './ui/Magnetic';
 import TextShimmer from './ui/TextShimmer';
 import Kicker from './ui/Kicker';
 import Typewriter from './ui/Typewriter';
+import Ghost from './treasure/Ghost';
 
 export default function Hero() {
   const wrapperRef = useRef(null);
@@ -134,6 +135,8 @@ export default function Hero() {
             See what I&apos;ve built →
           </span>
         </motion.div>
+
+        <Ghost id="hero" className="absolute right-8 top-28 z-20" />
 
         <motion.a
           href="#about"

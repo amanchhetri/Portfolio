@@ -16,6 +16,10 @@ import GradientHairline from './components/ui/GradientHairline';
 import CustomCursor from './components/ui/CustomCursor';
 import MouseOrb from './components/fx/MouseOrb';
 import Noise from './components/fx/Noise';
+import { HuntProvider } from './components/treasure/HuntProvider';
+import HuntBadge from './components/treasure/HuntBadge';
+import HuntCelebration from './components/treasure/HuntCelebration';
+import PlayModal from './components/treasure/PlayModal';
 
 export default function App() {
   const [enhanced, setEnhanced] = useState(false);
@@ -55,30 +59,35 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-bg text-text">
-      <CustomCursor />
-      {enhanced && <MouseOrb />}
-      {enhanced && <Noise />}
-      <Navbar />
-      <ScrollProgress />
+    <HuntProvider>
+      <div className="relative min-h-screen bg-bg text-text">
+        <CustomCursor />
+        {enhanced && <MouseOrb />}
+        {enhanced && <Noise />}
+        <Navbar />
+        <ScrollProgress />
+        <HuntBadge />
 
-      <main>
-        <Hero />
-        <GradientHairline />
-        <About />
-        <GradientHairline />
-        <Stats />
-        <GradientHairline />
-        <Skills />
-        <GradientHairline />
-        <Projects />
-        <GradientHairline />
-        <Experience />
-        <GradientHairline />
-        <Contact />
-      </main>
+        <main>
+          <Hero />
+          <GradientHairline />
+          <About />
+          <GradientHairline />
+          <Stats />
+          <GradientHairline />
+          <Skills />
+          <GradientHairline />
+          <Projects />
+          <GradientHairline />
+          <Experience />
+          <GradientHairline />
+          <Contact />
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+        <HuntCelebration />
+        <PlayModal />
+      </div>
+    </HuntProvider>
   );
 }

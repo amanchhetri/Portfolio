@@ -6,6 +6,7 @@ import SectionWrapper from '../hoc/SectionWrapper';
 import Reveal from './ui/Reveal';
 import GlowOnHover from './ui/GlowOnHover';
 import Kicker from './ui/Kicker';
+import Ghost from './treasure/Ghost';
 
 function Marquee({ items }) {
   const doubled = [...items, ...items];
@@ -67,7 +68,8 @@ function TechCard({ tech, index }) {
 
 function Skills() {
   return (
-    <div>
+    <div className="relative">
+      <Ghost id="skills" className="absolute bottom-2 right-2 z-10" />
       <Reveal>
         <Kicker number="03">Skills</Kicker>
       </Reveal>

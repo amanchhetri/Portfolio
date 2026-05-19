@@ -7,6 +7,7 @@ import Reveal from './ui/Reveal';
 import TiltCard from './ui/TiltCard';
 import GlowOnHover from './ui/GlowOnHover';
 import Kicker from './ui/Kicker';
+import Ghost from './treasure/Ghost';
 
 function ServiceCard({ title, icon, index }) {
   return (
@@ -37,7 +38,8 @@ function ServiceCard({ title, icon, index }) {
 
 function About() {
   return (
-    <div className="grid grid-cols-1 gap-16 lg:grid-cols-5 lg:gap-12">
+    <div className="relative grid grid-cols-1 gap-16 lg:grid-cols-5 lg:gap-12">
+      <Ghost id="about" className="absolute -top-2 right-0 z-10" />
       <div className="lg:col-span-2">
         <Reveal>
           <Kicker number="02">About</Kicker>

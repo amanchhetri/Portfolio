@@ -13,6 +13,7 @@ import Reveal from './ui/Reveal';
 import TiltCard from './ui/TiltCard';
 import GlowOnHover from './ui/GlowOnHover';
 import Kicker from './ui/Kicker';
+import Ghost from './treasure/Ghost';
 import { cn } from '../lib/cn';
 
 const TAG_COLORS = {
@@ -134,6 +135,7 @@ function ProjectsHorizontal() {
       <motion.div
         style={{ opacity }}
         className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
+        <Ghost id="projects" className="absolute right-8 top-6 z-30" />
         <div className="mx-auto mb-10 w-full max-w-6xl px-6 sm:px-10 lg:px-12">
           <Reveal>
             <Kicker number="04">Projects</Kicker>
@@ -168,7 +170,8 @@ function ProjectsHorizontal() {
 function ProjectsClassic() {
   return (
     <section id="projects" className="px-6 py-32 sm:px-10 sm:py-40 lg:px-12">
-      <div className="mx-auto max-w-6xl">
+      <div className="relative mx-auto max-w-6xl">
+        <Ghost id="projects" className="absolute right-0 top-0 z-10" />
         <Reveal>
           <Kicker number="04">Projects</Kicker>
         </Reveal>

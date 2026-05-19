@@ -6,6 +6,7 @@ import SectionWrapper from '../hoc/SectionWrapper';
 import Reveal from './ui/Reveal';
 import GlowOnHover from './ui/GlowOnHover';
 import Kicker from './ui/Kicker';
+import Ghost from './treasure/Ghost';
 
 function ExperienceItem({ experience }) {
   return (
@@ -54,7 +55,8 @@ function ExperienceItem({ experience }) {
 
 function Experience() {
   return (
-    <div>
+    <div className="relative">
+      <Ghost id="experience" className="absolute -top-2 right-0 z-10" />
       <Reveal>
         <Kicker number="05">Experience</Kicker>
       </Reveal>
