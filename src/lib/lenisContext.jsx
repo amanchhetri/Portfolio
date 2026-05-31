@@ -1,5 +1,6 @@
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useRef,
@@ -72,6 +73,16 @@ export function LenisProvider({ children }) {
     };
   }, []);
 
+  // Pause the live Lenis instance if the user enables reduced-motion mid-session.
+  // (If reduced-motion was already on at mount, Lenis was never created — the
+  // guard below no-ops in that case.)
+  useEffect(() => {
+    const lenis = lenisRef.current;
+    if (!lenis) return;
+    if (reduced) lenis.stop();
+    else lenis.start();
+  }, [reduced]);
+
   return (
     <LenisContext.Provider
       value={{ lenisRef, progressRef, listenersRef, enhanced, reduced }}
@@ -90,12 +101,17 @@ export function useLenisRaw() {
 export function useLenisProgress() {
   const ctx = useContext(LenisContext);
   if (!ctx) throw new Error('useLenisProgress must be used inside <LenisProvider>');
-  return useSyncExternalStore(
+  const { listenersRef, progressRef } = ctx;
+  const subscribe = useCallback(
     (cb) => {
-      ctx.listenersRef.current.add(cb);
-      return () => ctx.listenersRef.current.delete(cb);
+      listenersRef.current.add(cb);
+      return () => listenersRef.current.delete(cb);
     },
-    () => ctx.progressRef.current,
+    [listenersRef],
+  );
+  return useSyncExternalStore(
+    subscribe,
+    () => progressRef.current,
     () => 0,
   );
 }

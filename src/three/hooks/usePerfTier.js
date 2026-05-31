@@ -19,6 +19,9 @@ export function usePerfTier() {
   return tier;
 }
 
+// NOTE: `antialias` (fxaa/msaa2/msaa4) maps to a boolean gl context flag set at
+// Canvas mount only — WebGL's antialias flag is immutable after context creation,
+// so changing tier at runtime does not change MSAA. dpr/shadows ARE applied live.
 export const TIER_CONFIG = {
   low: {
     dprMax: 1,
