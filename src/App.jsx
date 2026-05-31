@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import Lenis from 'lenis';
+import { Suspense, lazy } from 'react';
 import {
   Hero,
   Navbar,
@@ -20,55 +19,28 @@ import { HuntProvider } from './components/treasure/HuntProvider';
 import HuntBadge from './components/treasure/HuntBadge';
 import HuntCelebration from './components/treasure/HuntCelebration';
 import PlayModal from './components/treasure/PlayModal';
+import { LenisProvider, useEnhanced } from './lib/lenisContext';
+import StaticHeroBackdrop from './three/StaticHeroBackdrop';
 
-export default function App() {
-  const [enhanced, setEnhanced] = useState(false);
+const SceneCanvas = lazy(() => import('./three/SceneCanvas'));
 
-  useEffect(() => {
-    const reduced = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches;
-    const mq = window.matchMedia('(min-width: 1024px) and (hover: hover)');
-    const cores = navigator.hardwareConcurrency || 8;
-    const setFromMq = (matches) => setEnhanced(!reduced && matches && cores >= 4);
-    setFromMq(mq.matches);
-    const handler = (e) => setFromMq(e.matches);
-    mq.addEventListener('change', handler);
-
-    if (reduced) {
-      return () => mq.removeEventListener('change', handler);
-    }
-    const lenis = new Lenis({
-      duration: 1.6,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      wheelMultiplier: 0.85,
-      touchMultiplier: 1.5,
-    });
-    let rafId;
-    const raf = (time) => {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    };
-    rafId = requestAnimationFrame(raf);
-    return () => {
-      mq.removeEventListener('change', handler);
-      cancelAnimationFrame(rafId);
-      lenis.destroy();
-    };
-  }, []);
+function AppShell() {
+  const enhanced = useEnhanced();
 
   return (
     <HuntProvider>
       <div className="relative min-h-screen bg-bg text-text">
         <CustomCursor />
+        <Suspense fallback={<StaticHeroBackdrop />}>
+          <SceneCanvas />
+        </Suspense>
         {enhanced && <MouseOrb />}
         {enhanced && <Noise />}
         <Navbar />
         <ScrollProgress />
         <HuntBadge />
 
-        <main>
+        <main className="relative z-10">
           <Hero />
           <GradientHairline />
           <About />
@@ -89,5 +61,13 @@ export default function App() {
         <PlayModal />
       </div>
     </HuntProvider>
+  );
+}
+
+export default function App() {
+  return (
+    <LenisProvider>
+      <AppShell />
+    </LenisProvider>
   );
 }

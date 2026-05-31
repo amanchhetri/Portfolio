@@ -13,5 +13,6 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': 'off',
     'react/prop-types': 'off',
+    'react/no-unknown-property': ['error', { ignore: ['attach', 'args', 'intensity', 'position', 'castShadow', 'receiveShadow', 'geometry', 'material', 'object'] }],
   },
 }
