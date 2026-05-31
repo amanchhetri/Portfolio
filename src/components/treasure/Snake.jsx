@@ -14,6 +14,7 @@ const PROJECT_PICKUPS = [
 const HIGH_SCORE_KEY = 'hunt:snake:high';
 
 function randomEmpty(snake) {
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     const x = Math.floor(Math.random() * GRID);
     const y = Math.floor(Math.random() * GRID);
