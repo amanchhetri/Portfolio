@@ -19,6 +19,7 @@ export default function WorkspaceScene({ tier }) {
 
   return (
     <>
+
       <ambientLight intensity={0.2} />
       <directionalLight
         position={[3, 5, 2]}

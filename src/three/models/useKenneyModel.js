@@ -26,6 +26,7 @@ export function useKenneyModel(
 
   return useMemo(() => {
     const clone = scene.clone(true);
+    let screenMesh = null;
     clone.traverse((o) => {
       if (!o.isMesh) return;
       const src = o.material;
@@ -40,7 +41,7 @@ export function useKenneyModel(
         });
         o.castShadow = false;
         o.receiveShadow = false;
-        if (onScreenMesh) onScreenMesh(o);
+        screenMesh = o;
       } else {
         o.material = new MeshStandardMaterial({
           color: src?.color ? src.color.clone() : new Color('#bfc4cc'),
@@ -52,6 +53,9 @@ export function useKenneyModel(
         o.receiveShadow = true;
       }
     });
+    // Attach screen content AFTER the traverse — adding the plane mid-traverse
+    // would let the loop overwrite its textured material with the default one.
+    if (screenMesh && onScreenMesh) onScreenMesh(screenMesh);
     const box = new Box3().setFromObject(clone);
     const center = box.getCenter(new Vector3());
     const y = anchor === 'top' ? -box.max.y : -box.min.y;

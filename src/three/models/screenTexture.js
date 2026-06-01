@@ -109,7 +109,7 @@ export function attachScreenContent(mesh, texture, { inset = 0.92 } = {}) {
     new MeshBasicMaterial({ map: texture, toneMapped: false, side: DoubleSide }),
   );
   plane.quaternion.setFromRotationMatrix(new Matrix4().makeBasis(t, b, n));
-  plane.position.copy(center).addScaledVector(n, Math.max(width, height) * 0.03 + 0.001);
+  plane.position.copy(center).addScaledVector(n, Math.max(width, height) * 0.12);
   plane.renderOrder = 2;
   mesh.add(plane);
   return plane;
