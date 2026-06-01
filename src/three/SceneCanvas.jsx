@@ -1,6 +1,8 @@
 import { Canvas } from '@react-three/fiber';
 import { usePerfTier, TIER_CONFIG } from './hooks/usePerfTier';
 import { useReducedMotionPref } from '../lib/lenisContext';
+import WorkspaceScene from './WorkspaceScene';
+import ScrollCamera from './ScrollCamera';
 
 export default function SceneCanvas() {
   const tier = usePerfTier();
@@ -24,8 +26,9 @@ export default function SceneCanvas() {
         shadows={config.shadows ? 'soft' : false}
         camera={{ position: [0, 1.5, 4], fov: 35 }}
       >
-        {/* Scene contents added in Phase 2 */}
         <color attach="background" args={['#05060A']} />
+        {!reduced && <ScrollCamera />}
+        <WorkspaceScene tier={tier} />
       </Canvas>
     </div>
   );
