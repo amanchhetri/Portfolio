@@ -443,3 +443,11 @@ These are intentionally deferred to implementation rather than over-specified no
 - Whether `MouseOrb` opacity needs reduction once 3D is the new backdrop (visual call once scene is live).
 - Whether idle camera jitter should run at 30 fps (compromise between `demand` and continuous) or stay off on mid-tier (perception call once scene is live).
 - Which specific Sketchfab models pass the Section 5.2 acceptance bar (research task in Phase 2).
+
+---
+## Phase 2 decision (2026-06-01)
+Bailout: **NO — continuing with GLTF workspace.**
+Notes: Using the **Kenney Furniture Kit** (CC0, not Sketchfab) — laptop/monitor/lamp/plant in one consistent low-poly set. Their `KHR_materials_unlit` materials are converted to `MeshStandardMaterial` on load so the cinematic light rig actually shapes them (§5.4). Motion is scroll-driven only (no idle animation), per owner direction. Approved by Aman.
+
+## Phase 3 note (2026-06-01)
+Camera choreography is driven by **global Lenis scroll progress sampled across the keyframe array**, not DOM-section-anchored `getElementById` lookups — avoids id conflicts with existing nav (`id="top"`) and treasure-hunt `Ghost` ids, and needs no edits to section components. Can be upgraded to exact section anchoring later if precise per-section sync is wanted.
