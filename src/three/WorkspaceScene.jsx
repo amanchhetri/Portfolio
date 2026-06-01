@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { ContactShadows } from '@react-three/drei';
+import Desk from './models/Desk';
 import Laptop from './models/Laptop';
 import Monitor from './models/Monitor';
 import Lamp from './models/Lamp';
@@ -31,24 +32,29 @@ export default function WorkspaceScene({ tier }) {
       <pointLight position={[2.6, 0.6, 1.4]} intensity={1.8} distance={9} decay={2} color="#22D3EE" />
 
       <Suspense fallback={null}>
-        <Laptop scale={SCALE} position={[0, 0, 0.7]} rotation={[0, -0.5, 0]} />
-        <Monitor scale={SCALE} position={[0.2, 0, -0.9]} rotation={[0, -0.25, 0]} />
+        {/* Desk surface — top sits at y=0, everything else rests on it. */}
+        <Desk scale={SCALE} position={[0, 0, 0]} />
 
+        {/* Monitor + laptop clustered at center-back. */}
+        <Monitor scale={SCALE} position={[0.3, 0, -0.9]} rotation={[0, -0.18, 0]} />
+        <Laptop scale={SCALE} position={[-0.5, 0, 0.3]} rotation={[0, -0.4, 0]} />
+
+        {/* Lamp + plant pushed out toward the desk edges. */}
         {config.showLamp && (
           <>
-            <Lamp scale={SCALE} position={[2.2, 0, -0.5]} rotation={[0, -0.6, 0]} />
+            <Lamp scale={SCALE} position={[2.0, 0, -0.8]} rotation={[0, -0.7, 0]} />
             <pointLight
-              position={[2.0, 2.0, -0.2]}
+              position={[1.8, 2.2, -0.5]}
               intensity={config.shadows ? 1.6 : 1.0}
               color="#FFC68A"
-              distance={4.5}
+              distance={5}
               decay={2}
             />
           </>
         )}
 
         {config.showPlant && (
-          <Plant scale={PLANT_SCALE} position={[-2.4, 0, -0.3]} />
+          <Plant scale={PLANT_SCALE} position={[-2.0, 0, -0.7]} />
         )}
       </Suspense>
 

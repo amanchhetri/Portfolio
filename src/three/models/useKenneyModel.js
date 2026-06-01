@@ -9,7 +9,10 @@ import { Box3, Vector3, MeshStandardMaterial, Color } from 'three';
 //     scene light rig shapes it,
 //  3. recenter on X/Z and drop the bottom onto y=0 so callers can place props
 //     on a common floor plane via position alone.
-export function useKenneyModel(path, { roughness = 0.5, metalness = 0.15 } = {}) {
+// anchor: 'bottom' (default) drops the model's base onto y=0 so it rests on a
+// floor/surface; 'top' aligns its top to y=0 so it acts AS a surface other
+// bottom-anchored props can sit on (used for the desk).
+export function useKenneyModel(path, { roughness = 0.5, metalness = 0.15, anchor = 'bottom' } = {}) {
   const { scene } = useGLTF(path);
 
   return useMemo(() => {
@@ -28,7 +31,8 @@ export function useKenneyModel(path, { roughness = 0.5, metalness = 0.15 } = {})
     });
     const box = new Box3().setFromObject(clone);
     const center = box.getCenter(new Vector3());
-    clone.position.set(-center.x, -box.min.y, -center.z);
+    const y = anchor === 'top' ? -box.max.y : -box.min.y;
+    clone.position.set(-center.x, y, -center.z);
     return clone;
-  }, [scene, roughness, metalness]);
+  }, [scene, roughness, metalness, anchor]);
 }

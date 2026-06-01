@@ -4,6 +4,14 @@
 
 export const MODEL_SOURCES = [
   {
+    key: 'desk',
+    path: '/models/desk.glb',
+    title: 'Furniture Kit — Desk',
+    author: 'Kenney',
+    license: 'CC0-1.0',
+    sourceUrl: 'https://kenney.nl/assets/furniture-kit',
+  },
+  {
     key: 'laptop',
     path: '/models/laptop.glb',
     title: 'Furniture Kit — Laptop',
