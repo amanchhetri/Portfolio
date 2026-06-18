@@ -49,10 +49,10 @@ function About() {
         </Reveal>
         <Reveal delay={0.1}>
           <p className={`${styles.body} mt-6 max-w-prose`}>
-            As an enthusiastic front-end developer, I bring extensive expertise in JavaScript, React.js, Next.js, and Redux to the table. My primary focus revolves around crafting visually stunning and responsive web applications that captivate users. By harnessing the power of tools such as Tailwind CSS, Material UI, and Bootstrap, I strive to deliver seamless user experiences that leave a lasting impression.
+            As a front-end developer, I build visually striking, responsive web applications with JavaScript, React.js, Next.js, and Redux — using Tailwind CSS, Material UI, and Framer Motion to craft seamless, memorable user experiences.
           </p>
           <p className={`${styles.body} mt-4 max-w-prose`}>
-            Moreover, I excel in integrating interactive maps using technologies like Deck GL and the Google Maps API, enriching applications with dynamic and engaging functionalities. My proficiency extends to efficiently working with REST APIs, enabling seamless data exchange and enhancing the overall user experience.
+            I work AI-first: leveraging modern AI tools to ship faster, cleaner, and more efficiently across the stack. Beyond using AI, I build with it — developing AI-powered products like video generation tools and other intelligent applications. I'm also experienced with interactive maps (Deck GL, Google Maps API) and REST APIs for rich, data-driven interfaces.
           </p>
         </Reveal>
       </div>
