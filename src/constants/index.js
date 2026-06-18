@@ -3,6 +3,7 @@ import {
   backend,
   ux,
   prototyping,
+  ai,
   javascript,
   typescript,
   html,
@@ -54,8 +55,8 @@ const services = [
     icon: ux,
   },
   {
-    title: 'Software Testing',
-    icon: prototyping,
+    title: 'AI Development',
+    icon: ai,
   },
 ];
 

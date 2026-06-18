@@ -5,6 +5,7 @@ import backend from './icons/backend.webp';
 import ux from './icons/ux.webp';
 import frontend from './icons/frontend.webp';
 import prototyping from './icons/prototyping.webp';
+import ai from './icons/ai.svg';
 import github from './icons/github.webp';
 import close from './icons/close.webp';
 import menu from './icons/menu.webp';
@@ -40,6 +41,7 @@ export {
   ux,
   frontend,
   prototyping,
+  ai,
   github,
   close,
   menu,
